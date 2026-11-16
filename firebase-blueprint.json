@@ -1,0 +1,304 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Private user account profile for NOVA AI.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Firebase Auth UID of the account owner."
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Display name shown in the user profile."
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 254,
+          "description": "Account email address if available."
+        },
+        "photoUrl": {
+          "type": "string",
+          "maxLength": 100000,
+          "description": "User profile avatar URL or compact resized data URL."
+        },
+        "authProvider": {
+          "type": "string",
+          "enum": ["google", "apple", "email", "anonymous"],
+          "description": "Authentication provider used to sign in."
+        },
+        "onboardingCompleted": {
+          "type": "boolean",
+          "description": "Whether the user completed the first-time name setup."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Account creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last account update timestamp."
+        }
+      },
+      "required": [
+        "uid",
+        "displayName",
+        "authProvider",
+        "onboardingCompleted",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "UserSettings": {
+      "title": "User Settings",
+      "description": "User appearance, personalization, notification, sound, and privacy preferences.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Owner user UID."
+        },
+        "theme": {
+          "type": "string",
+          "enum": ["dark", "light"],
+          "description": "Preferred UI color theme."
+        },
+        "accentColor": {
+          "type": "string",
+          "enum": ["mono", "blue", "emerald", "amber", "rose", "violet"],
+          "description": "Preferred accent color palette."
+        },
+        "language": {
+          "type": "string",
+          "enum": ["en", "ar"],
+          "description": "Preferred interface language."
+        },
+        "chatDensity": {
+          "type": "string",
+          "enum": ["comfortable", "compact"],
+          "description": "Message spacing density."
+        },
+        "fontSize": {
+          "type": "string",
+          "enum": ["sm", "md", "lg"],
+          "description": "Chat text size."
+        },
+        "typingSpeed": {
+          "type": "string",
+          "enum": ["fast", "natural", "instant"],
+          "description": "AI typing animation speed."
+        },
+        "hapticsEnabled": {
+          "type": "boolean",
+          "description": "Enable subtle haptic vibration on reply completion."
+        },
+        "soundEnabled": {
+          "type": "boolean",
+          "description": "Enable subtle sound cues."
+        },
+        "notificationsEnabled": {
+          "type": "boolean",
+          "description": "Enable in-app notifications."
+        },
+        "featureAnnouncements": {
+          "type": "boolean",
+          "description": "Receive new feature announcements."
+        },
+        "accountAlerts": {
+          "type": "boolean",
+          "description": "Receive important account alerts."
+        },
+        "autoSaveHistory": {
+          "type": "boolean",
+          "description": "Automatically save conversations to history."
+        },
+        "hidePreviews": {
+          "type": "boolean",
+          "description": "Hide message previews for extra privacy."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last settings update timestamp."
+        }
+      },
+      "required": [
+        "userId",
+        "theme",
+        "accentColor",
+        "language",
+        "chatDensity",
+        "fontSize",
+        "typingSpeed",
+        "hapticsEnabled",
+        "soundEnabled",
+        "notificationsEnabled",
+        "featureAnnouncements",
+        "accountAlerts",
+        "autoSaveHistory",
+        "hidePreviews",
+        "updatedAt"
+      ]
+    },
+    "UserNotification": {
+      "title": "User Notification",
+      "description": "Private in-app notification for account events or feature updates.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Owner user UID."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "description": "Notification title."
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600,
+          "description": "Notification message body."
+        },
+        "category": {
+          "type": "string",
+          "enum": ["feature", "account", "system"],
+          "description": "Notification category."
+        },
+        "read": {
+          "type": "boolean",
+          "description": "Whether the user has read the notification."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Notification creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Notification update timestamp."
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "body",
+        "category",
+        "read",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "A private NOVA AI chat conversation belonging to a single user.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Owner user UID."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "description": "Conversation title."
+        },
+        "customTitle": {
+          "type": "boolean",
+          "description": "Whether the title was manually renamed by the user."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last message or edit timestamp."
+        }
+      },
+      "required": ["userId", "title", "customTitle", "createdAt", "updatedAt"]
+    },
+    "ChatMessage": {
+      "title": "Chat Message",
+      "description": "A single message inside a private NOVA AI conversation.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Owner user UID."
+        },
+        "conversationId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Parent conversation ID."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["user", "model"],
+          "description": "Sender role."
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32000,
+          "description": "Message text content."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Message timestamp."
+        }
+      },
+      "required": ["userId", "conversationId", "role", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Private user account profile document."
+    },
+    "/users/{userId}/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/UserSettings" },
+      "description": "Private user settings and personalization preferences."
+    },
+    "/users/{userId}/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/UserNotification" },
+      "description": "Private in-app notifications belonging to userId."
+    },
+    "/users/{userId}/conversations/{conversationId}": {
+      "schema": { "$ref": "#/entities/Conversation" },
+      "description": "Private conversations owned strictly by userId."
+    },
+    "/users/{userId}/conversations/{conversationId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Messages belonging to a user's private conversation."
+    }
+  }
+}

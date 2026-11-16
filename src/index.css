@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Outfit", "IBM Plex Sans Arabic", sans-serif;
+  --font-sans: "Plus Jakarta Sans", "IBM Plex Sans Arabic", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+:root {
+  --nova-bg: #FFFFFF;
+  --nova-surface: #FFFFFF;
+  --nova-surface-subtle: #F4F4F5;
+  --nova-border: rgba(9, 9, 11, 0.12);
+  --nova-border-strong: rgba(9, 9, 11, 0.24);
+  --nova-text: #09090B;
+  --nova-text-muted: #52525B;
+  --nova-accent: #09090B;
+  --nova-accent-fg: #FFFFFF;
+  --nova-accent-hover: #27272A;
+  --nova-accent-soft: rgba(9, 9, 11, 0.06);
+}
+
+.dark {
+  --nova-bg: #000000;
+  --nova-surface: #000000;
+  --nova-surface-subtle: #0D0D0F;
+  --nova-border: rgba(255, 255, 255, 0.11);
+  --nova-border-strong: rgba(255, 255, 255, 0.24);
+  --nova-text: #FFFFFF;
+  --nova-text-muted: #A1A1AA;
+  --nova-accent: #FFFFFF;
+  --nova-accent-fg: #000000;
+  --nova-accent-hover: #E4E4E7;
+  --nova-accent-soft: rgba(255, 255, 255, 0.07);
+}
+
+[data-accent="blue"] {
+  --nova-accent: #2563EB;
+  --nova-accent-fg: #FFFFFF;
+  --nova-accent-hover: #1D4ED8;
+  --nova-accent-soft: rgba(37, 99, 235, 0.14);
+}
+
+[data-accent="emerald"] {
+  --nova-accent: #059669;
+  --nova-accent-fg: #FFFFFF;
+  --nova-accent-hover: #047857;
+  --nova-accent-soft: rgba(5, 150, 105, 0.14);
+}
+
+[data-accent="amber"] {
+  --nova-accent: #F59E0B;
+  --nova-accent-fg: #09090B;
+  --nova-accent-hover: #D97706;
+  --nova-accent-soft: rgba(245, 158, 11, 0.16);
+}
+
+[data-accent="rose"] {
+  --nova-accent: #E11D48;
+  --nova-accent-fg: #FFFFFF;
+  --nova-accent-hover: #BE123C;
+  --nova-accent-soft: rgba(225, 29, 72, 0.14);
+}
+
+[data-accent="violet"] {
+  --nova-accent: #7C3AED;
+  --nova-accent-fg: #FFFFFF;
+  --nova-accent-hover: #6D28D9;
+  --nova-accent-soft: rgba(124, 58, 237, 0.15);
+}
+
+@layer base {
+  html,
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--nova-bg);
+    color: var(--nova-text);
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--nova-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--nova-border-strong);
+  border-radius: 9999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
